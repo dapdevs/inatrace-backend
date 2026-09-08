@@ -2,6 +2,11 @@ package com.abelium.inatrace.components.currencies.api;
 
 import java.util.Map;
 
+/**
+ * openexchangerates.org's /currencies.json endpoint returns a flat {code: name} JSON object
+ * with no wrapper, so instances of this class are built manually by ExchangeRateClient
+ * (based on the HTTP status) rather than deserialized directly from the response body.
+ */
 public class ApiCurrencySymbolsResponse {
 
     private boolean success;
