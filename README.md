@@ -26,7 +26,7 @@ This new major release includes new functionalities, refactorings, optimizations
 * Added support for defining Processing evidence fields in the system settings.
 * Translation for facilities, processing actions, semi-products and processing evidence types and fields can be provided in the system as part of its definition.
 * Added support for currencies in the system. The enabled currencies can be selected in the system settings. These currencies then appear as select options in various parts of the system where the user is expected to select a currency.
-* Added exchange rates for the enabled currencies that are synced daily. The currencies data is provided by the https://exchangeratesapi.io/ API.
+* Added exchange rates for the enabled currencies that are synced daily. The currencies data is provided by the https://openexchangerates.org/ API, pivoted on USD.
 * The product section now includes Final products. Final products represent the output of final processing. The final products can be configured by the product admin company.
 * When placing a customer order, now we select a final product instead of a sellable semi-product.
 * Added support for new types of processing actions.
@@ -127,7 +127,8 @@ Spring uses `application.properties` file stored in `src/main/resources` for con
 
 ###### Exchange rates API
 
-- `INAtrace.exchangerate.apiKey`: API key for exchange rate service. Create a free account at [https://exchangeratesapi.io](https://exchangeratesapi.io/) to get an API key.
+- `INAtrace.exchangerate.appId`: App ID for the exchange rate service. Create a free account at [https://openexchangerates.org](https://openexchangerates.org/) to get an App ID.
+- `INAtrace.exchangerate.baseCurrency`: Pivot currency used to store and convert exchange rates. Fixed to `USD` on the free openexchangerates.org plan.
 
 ###### Beyco integration
 INATrace supports integration with the Beyco platform. This allows users to create Beyco offers automatically from INATrace stock orders. For more info about Beyco, please go to: `https://beyco.nl`. This integration is optional. Integration properties are following:
@@ -338,7 +339,7 @@ Currency service manages exchange rate data retrieval and currency conversion.
 
 #### Exchange rate retrieval
 
-The service uses [exchangeratesapi.io](http://exchangeratesapi.io/) API for fetching currency conversion rates. It runs daily at 00:01 system time. The API is limited to 250 requests per day.
+The service uses the [openexchangerates.org](https://openexchangerates.org/) API for fetching currency conversion rates, pivoted on the configurable base currency (`INAtrace.exchangerate.baseCurrency`, USD by default). It runs daily at 00:01 system time, in addition to once on every application startup.
 
 #### Currency conversion
 

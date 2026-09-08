@@ -11,9 +11,9 @@ import java.util.Date;
 @NamedQuery(name = "CurrencyPair.getLatestDate",
             query = "SELECT c.date FROM CurrencyPair c ORDER BY c.date DESC")
 @NamedQuery(name = "CurrencyPair.latestRate",
-            query = "SELECT c.value FROM CurrencyPair c WHERE c.from.code = 'EUR' AND c.to.code = :currency ORDER BY c.date DESC")
+            query = "SELECT c.value FROM CurrencyPair c WHERE c.from.code = :base AND c.to.code = :currency ORDER BY c.date DESC")
 @NamedQuery(name = "CurrencyPair.rateAtDate",
-            query = "SELECT c.value FROM CurrencyPair c WHERE c.from.code = 'EUR' AND c.to.code = :currency AND c.date = :date")
+            query = "SELECT c.value FROM CurrencyPair c WHERE c.from.code = :base AND c.to.code = :currency AND c.date = :date")
 public class CurrencyPair extends BaseEntity {
 
     @Temporal(TemporalType.DATE)

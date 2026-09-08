@@ -134,8 +134,11 @@ INATrace.maxmindDB.path =
 # "Secret" token for logging request
 INATrace.requestLog.token =
 
-# Exchange rate API key
-INAtrace.exchangerate.apiKey =
+# openexchangerates.org App ID (see https://openexchangerates.org/account/app-ids)
+INAtrace.exchangerate.appId =
+
+# Pivot/base currency used to store and convert exchange rates (fixed to USD on the free openexchangerates.org plan)
+INAtrace.exchangerate.baseCurrency = USD
 
 # Beyco integration OAuth2 data
 beyco.oauth2.clientId =
